@@ -23,26 +23,24 @@ function App() {
 
   const [robotChoice, setRobotChoice] = useState('null');
 
+  const [wins, setWins] = useState(0);
+
   const playerChose = (event) => {
 
-    let choice = event.currentTarget.value;
+    let choice1 = event.currentTarget.value;
 
-    console.log("the player is picking their fighter!");
-    console.log(playing);
     setPlaying(true);
-    console.log(playing);
-    console.log(choice)
-    if (choice == 'Rock') {
+    if (choice1 == 'Rock') {
       setSelectedChoice(rock);
     }
-    else if (choice == 'Paper') {
+    else if (choice1 == 'Paper') {
       setSelectedChoice(paper);
     }
     else {
       setSelectedChoice(scissors);
     }
 
-    choice = Math.floor(Math.random() * 3)
+    let choice = Math.floor(Math.random() * 3)
     if (choice == 0) {
       setRobotChoice(paper);
     }
@@ -52,6 +50,16 @@ function App() {
     else {
       setRobotChoice(scissors);
     }
+
+    checkWin(choice1, choice);
+
+  }
+
+  const checkWin = (selectedChoice, robotChoice) => {
+    if ((selectedChoice.toLowerCase() == 'rock' && robotChoice == 2) || (selectedChoice.toLowerCase() == 'scissors' && robotChoice == 0) || (selectedChoice.toLowerCase() == 'paper' && robotChoice == 1)) {
+      setWins(wins + 1);
+    }
+    
   }
 
   return (
@@ -59,8 +67,12 @@ function App() {
       <Container fluid>
         
         <Row style={{height: '30%'}}>
-          <Col className="test d-flex justify-content-center title">
+          <Col md='3' className="test"></Col>
+          <Col className="test d-flex justify-content-center title" md='6'>
           Welcome to ROCK PAPER SCISSORS SIMULATOR
+          </Col>
+          <Col className="test d-flex justify-content-center title" md='3'>
+          Score: {wins}
           </Col>
         </Row>
 
