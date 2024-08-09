@@ -1,0 +1,24 @@
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body > #root > div {
+  height: 100vh;
+}
+
+.test {
+  color: red;
+  background-color: gray;
+
+}
+
+.title {
+  font-size: xx-large;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+}
+
+.choice {
+  width: 80px;
+}
