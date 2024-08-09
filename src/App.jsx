@@ -21,6 +21,8 @@ function App() {
 
   const [playing, setPlaying] = useState(false);
 
+  const [robotChoice, setRobotChoice] = useState('null');
+
   const playerChose = (event) => {
 
     let choice = event.currentTarget.value;
@@ -39,19 +41,16 @@ function App() {
     else {
       setSelectedChoice(scissors);
     }
-    console.log(selectedChoice)
-  }
 
-  const robotChoice = () => {
-    let choice = Math.floor(Math.random() * 3)
+    choice = Math.floor(Math.random() * 3)
     if (choice == 0) {
-      return paper;
+      setRobotChoice(paper);
     }
     else if (choice == 1) {
-      return rock;
+      setRobotChoice(rock);
     }
     else {
-      return scissors;
+      setRobotChoice(scissors);
     }
   }
 
@@ -116,7 +115,7 @@ function App() {
           <Col
             className="test d-flex justify-content-center align-items-center" 
           >
-            <Image src={playing ? robotChoice() : robot} fluid/>
+            <Image src={playing ? robotChoice : robot} fluid/>
           </Col>
 
           <Col className="test"></Col>
