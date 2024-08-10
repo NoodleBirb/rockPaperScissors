@@ -1,11 +1,12 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
+import Confetti from 'react-confetti';
 
 // image imports
 import VS from './assets/images/VS.png';
@@ -18,10 +19,10 @@ import robot from './assets/images/robot.png';
 function App() {
 
   const [selectedChoice, setSelectedChoice] = useState('null');
-
   const [playing, setPlaying] = useState(false);
-
   const [robotChoice, setRobotChoice] = useState('null');
+
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const [wins, setWins] = useState(0);
 
@@ -58,14 +59,23 @@ function App() {
   const checkWin = (selectedChoice, robotChoice) => {
     if ((selectedChoice.toLowerCase() == 'rock' && robotChoice == 2) || (selectedChoice.toLowerCase() == 'scissors' && robotChoice == 0) || (selectedChoice.toLowerCase() == 'paper' && robotChoice == 1)) {
       setWins(wins + 1);
+      setShowConfetti(true);
     }
     
   }
 
+  useEffect(() => {
+    if(showConfetti) {
+       const Timer = setTimeout(() => {
+        setShowConfetti(false)}, 1500);
+      return () => clearTimeout(Timer);
+    }
+  }, [showConfetti]);
+
   return (
     <>
       <Container fluid>
-        
+        {showConfetti && <Confetti/>}
         <Row style={{height: '30%'}}>
           <Col md='3' className="test"></Col>
           <Col className="test d-flex justify-content-center title" md='6'>
